@@ -1,0 +1,185 @@
+
+<div class="page">
+    <div id="header">
+        <div id="title">
+            <h1>
+                MasterPass Standard Flow
+            </h1>
+        </div>
+        <div id="logindisplay">
+            &nbsp;
+        </div>
+        
+    </div>
+    <div id="main">
+        <h1>
+            Shopping Cart Data Submitted
+        </h1>
+<% if @data.error_message != nil %>
+    
+<h2>Error</h2>
+<div class = "error">
+    <p>
+        The following error occurred while trying to get the Request Token from the MasterCard API.
+    </p>        
+<pre>
+<code>
+<%= @data.error_message %>
+</code>
+</pre>
+</div>
+
+<% end %>          
+        <p>
+            This step sends the Merchants shopping cart data to MasterCard services for display in the Wallet.
+        </p>
+        
+      <fieldset>
+        <legend>Sent:</legend>
+        <table>
+             <tr>
+                    <th>
+                        Authorization Header 
+                    </th>
+                    <td>                      
+                        <code><%= @data.auth_header %></code>
+                    </td>
+                </tr> 
+                <tr>
+                    <th>
+                        Signature Base String 
+                    </th>
+                    <td>
+                        <hr>
+                         <code><%= @data.signature_base_string %></code>
+                    </td>
+                </tr>  
+                <tr>
+                    <th>
+                        Shopping Cart 
+                    </th>
+                    <td>
+<pre>                        
+<code>                        
+    <% @data.shopping_cart_request.shoppingCart.shoppingCartItem.each {|item| %>
+        <%= item.description %> - <i>$<%= item.value %></i><br>
+    <% } %>
+</code>
+</pre>                            
+                    </td>
+                </tr>  
+       </table>
+       </fieldset>
+       <fieldset>
+        <legend>Sent To:</legend>
+            <table>                     
+                <tr>
+                    <th>
+                        Shopping Cart URL 
+                    </th>
+                    <td>
+                        <%= @data.shopping_cart_url %>
+                    </td>
+                </tr>
+                
+             </table>  
+             </fieldset>
+        <fieldset>
+        <legend>Received:</legend>           
+                
+            <table>                     
+                <tr>
+                    <th>
+                        Shopping Cart Response 
+<!--                             <span class='tooltip' id='ShoppingResponse'>[?]</span> -->
+                    </th>
+                    <td>
+                    <pre>                        
+<code>                        
+
+</code>
+                    </pre>                           
+                    </td>
+                </tr>
+                 
+             </table>
+             </fieldset>
+            <fieldset>
+                <legend>Standard Checkout</legend>
+                <br/>
+                <div style="padding-bottom: 20px">
+                    <div id="checkoutButtonDiv" onClick="handleBuyWithMasterPass()">
+                    <a href="#">
+                        <img src="https://www.mastercard.com/mc_us/wallet/img/en/US/mcpp_wllt_btn_chk_147x034px.png" alt="Buy with MasterPass">
+                    </a>
+                    </div>
+                    <p><a href="http://www.mastercard.com/mc_us/wallet/learnmore/en" target="_blank">Learn More</a></p>
+                </div>
+                <div>
+                <fieldset>
+                <legend>Javascript</legend>
+                    <pre><code id="sampleCode"></code></pre>
+                </fieldset>
+            </div>
+            </fieldset>
+            <fieldset>
+                <legend>Connected Checkout</legend>
+                <br/>
+                <div id="pairingCheckoutDiv">
+                    <form id="pairingCheckoutForm" method="POST">
+                        <input id="pairingCheckout" value="Checkout with Pairing Flow" type="submit">
+                    </form>
+                </div>
+            </fieldset>
+            
+        <%= masterpass_js_tags @data %>    
+        <script>
+        var showRewards = false == true;
+        $(document).ready(function(){
+            if (showRewards){
+                var sampleCodeString = 'MasterPass.client.checkout({\n\t"requestToken":<%= @data.request_token_response.oauth_token%>,\n\t"callbackUrl":<%= @data.callback_url%>,\n\t"merchantCheckoutId":<%= @data.checkout_identifier%>,\n\t"allowedCardTypes":<%= @data.accepted_cards%>,\n\t"cancelCallback":<%= @data.callback_domain%>,\n\t"suppressShippingAddressEnable":<%= @data.shipping_suppression%>,\n\t"loyaltyEnabled":<%= @data.rewards%>,\n\t"allowedLoyaltyPrograms":<%= raw @data.allowed_loyalty_programs%>,\n\t"requestBasicCheckout":<%= @data.auth_level_basic%>,\n\t"version":"v6"\n});';
+            } else {
+                var sampleCodeString = 'MasterPass.client.checkout({\n\t"requestToken":<%= @data.request_token_response.oauth_token%>,\n\t"callbackUrl":<%= @data.callback_url%>,\n\t"merchantCheckoutId":<%= @data.checkout_identifier%>,\n\t"allowedCardTypes":<%= @data.accepted_cards%>,\n\t"cancelCallback":<%= @data.callback_domain%>,\n\t"suppressShippingAddressEnable":<%= @data.shipping_suppression%>,\n\t"loyaltyEnabled":<%= @data.rewards%>,\n\t"requestBasicCheckout":<%= @data.auth_level_basic%>,\n\t"version":"v6"\n});';
+            }
+            $("#sampleCode").text(sampleCodeString);
+            
+        })
+        
+        $('#pairingCheckout').click(function(event) {
+                $("#pairingCheckoutForm").attr("action", "/pairingtoken?checkout=true");
+                $("#pairingCheckoutForm").submit();
+        });
+
+        function handleBuyWithMasterPass() {
+            if (showRewards){
+                MasterPass.client.checkout({
+                     "requestToken":"<%= @data.request_token_response.oauth_token%>",
+                     "callbackUrl":"<%=@host_name + @data.callback_url%>",
+                     "merchantCheckoutId":"<%= @data.checkout_identifier%>",
+                     "allowedCardTypes":"<%= @data.accepted_cards%>",
+                     "cancelCallback" : "<%= @data.callback_domain%>",
+                     "suppressShippingAddressEnable": "<%= @data.shipping_suppression%>",
+                     "loyaltyEnabled" : "<%= @data.rewards%>",
+                     "allowedLoyaltyPrograms":<%= raw @data.allowed_loyalty_programs%>,
+                     "requestBasicCheckout" : <%= @data.auth_level_basic%>,
+                     "version":"v6"
+                });
+            } else {
+                MasterPass.client.checkout({
+                     "requestToken":"<%= @data.request_token_response.oauth_token%>",
+                     "callbackUrl":"<%= @host_name + @data.callback_url%>",
+                     "merchantCheckoutId":"<%= @data.checkout_identifier%>",
+                     "allowedCardTypes":"<%= @data.accepted_cards%>",
+                     "cancelCallback" : "<%= @data.callback_domain%>",
+                     "suppressShippingAddressEnable": "<%= @data.shipping_suppression%>",
+                     "loyaltyEnabled" : "<%= @data.rewards%>",
+                     "requestBasicCheckout" : <%= @data.auth_level_basic%>,
+                     "version":"v6"
+                });
+            }
+        }
+        
+        
+   </script> 
+   </div>
+</div>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<ShoppingCartRequest>
+  <OAuthToken></OAuthToken>
+  <ShoppingCart>
+    <CurrencyCode>USD</CurrencyCode>
+    <Subtotal>100</Subtotal>
+    
+    <ShoppingCartItem>
+      <Description>XBøx 360©</Description>
+      <Quantity>1</Quantity>
+      <Value>29999</Value>
+      <ImageURL>http://projectabc.com/images/xbox.jpg</ImageURL>
+    </ShoppingCartItem>
+    
+  </ShoppingCart>
+</ShoppingCartRequest>

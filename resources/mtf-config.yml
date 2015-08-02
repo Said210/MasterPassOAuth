@@ -1,0 +1,27 @@
+REQUEST_URL: https://api.mastercard.com/oauth/consumer/v1/request_token
+SHOPPING_CART_URL: https://api.mastercard.com/mtf/masterpass/v6/shopping-cart
+ACCESS_URL: https://api.mastercard.com/oauth/consumer/v1/access_token
+POSTBACK_URL: https://api.mastercard.com/mtf/masterpass/v6/transaction
+PRE_CHECKOUT_URL: https://api.mastercard.com/mtf/masterpass/v6/precheckout
+EXPRESS_CHECKOUT_URL: https://api.mastercard.com/mtf/masterpass/v6/expresscheckout
+MERCHANT_INIT_URL: https://api.mastercard.com/mtf/masterpass/v6/merchant-initialization
+PAIRING_CALLBACK_PATH: /pairingcallback
+EXPRESS_CALLBACK_PATH: /pairingcallback?express=true
+CART_CALLBACK_PATH: /cartcallback
+CONNECTED_CALLBACK_PATH: /oauthcallback?connect=true
+CALLBACK_DOMAIN: http://projectabc.com
+CALLBACK_PATH: /oauthcallback
+CONSUMER_KEY: RLqJXHB-mTyAPkXHLX5T2nqM-4gzB9xaZjBmzkR2ec493cc2!44346a53486c545745382b36643778327071374948673d3d
+CHECKOUT_IDENTIFIER: a4a6x55eoe28dhxdvtpd41hxgd7ufe14r7
+KEYSTORE_PASSWORD: lepassword
+KEYSTORE_PATH: resources/Certs/MTFMCOpenAPI.p12
+SHIPPING_PROFILES: "US,CA,FR,MEX,NA,UK"
+REALM: eWallet
+AUTH_LEVEL_BASIC: false
+ALLOWED_LOYALTY_PROGRAMS: 4878508, 4735583
+XML_VERSION: v2
+SHIPPING_SUPPRESSION: false
+CHECKOUT_URL: https://api.mastercard.com/mtf/masterpass/v6/checkout
+LIGHTBOX_URL: https://mtf.masterpass.com/lightbox/Switch/integration/MasterPass.client.js
+OMNITURE_URL : https://sandbox.masterpass.com/lightbox/Switch/assets/js/MasterPass.omniture.js
+

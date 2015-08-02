@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PrecheckoutDataRequest>
+    <PairingDataTypes>
+        <PairingDataType>
+            <Type>ADDRESS</Type>
+        </PairingDataType>
+        <PairingDataType>
+            <Type>PROFILE</Type>
+        </PairingDataType>
+        <PairingDataType>
+            <Type>CARD</Type>
+        </PairingDataType>
+    </PairingDataTypes>
+</PrecheckoutDataRequest>

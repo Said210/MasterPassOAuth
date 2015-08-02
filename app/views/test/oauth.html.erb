@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1>HOLA</h1>
+	<p>
+		Este es el Request
+		<%= @request %>
+		<form action="/shoppingcart" method="POST">
+			<input type="hidden" name="oauth_token" id="oauth_token" value="<%=@data.request_token_response.oauth_token %>">
+			<input type="hidden" name="RedirectUrl" id="RedirectUrl" value="<%=@data.request_token_response.xoauth_request_auth_url %>">
+			<input value="Shopping Cart" type="submit">
+		</form>
+	</p>
+</body>
+</html>
