@@ -1,0 +1,80 @@
+<h1>Holaaa</h1>
+<div class="page">
+	<div id="header">
+		<div id="title">
+			<h1>MasterPass Checkout</h1>
+		</div>
+		<div id="logindisplay">&nbsp;</div>
+		
+	</div>
+	<div id="main">
+		<h1>Complete: Transaction Posted</h1>
+		<p>Final step! Log the transaction to MasterCard's services.</p>
+		<fieldset>
+			<legend>Sent:</legend>
+			<table>
+				<tr>
+					<th>
+						Authorization Header 
+					</th>
+					<td>
+						<code><%= @data.auth_header %></code>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						Signature Base String 
+					</th>
+					<td>
+						<hr> 
+						<code><%= @data.signature_base_string %></code>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						Sent Body  
+					</th>
+					<td><pre>
+<code>
+<%= @data.post_transaction_sent_xml %>
+</code>
+</pre>
+					</td>
+				</tr>
+			</table>
+		</fieldset>
+
+		<fieldset>
+			<legend>Sent To:</legend>
+			<table>
+				<tr>
+					<th>
+						Transaction URL 
+					</th>
+					<td>
+						<%= @data.postback_url %>
+					</td>
+				</tr>
+			</table>
+		</fieldset>
+		<fieldset>
+			<legend>Received:</legend>
+			<table>
+				<tr>
+					<th>
+						Received Body  
+					</th>
+					<td><pre>
+<code>
+<%= @data.post_transaction_received_xml %>
+</code>
+</pre>
+					</td>
+				</tr>
+			</table>
+		</fieldset>
+		<form action="./" method="get">
+			<input value="Click To Start Over" type="submit">
+		</form>
+	</div>
+</div>

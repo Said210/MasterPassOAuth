@@ -5,14 +5,86 @@
 </head>
 <body>
 	<h1>HOLA</h1>
-	<p>
-		Este es el Request
-		<%= @request %>
-		<form action="/shoppingcart" method="POST">
-			<input type="hidden" name="oauth_token" id="oauth_token" value="<%=@data.request_token_response.oauth_token %>">
-			<input type="hidden" name="RedirectUrl" id="RedirectUrl" value="<%=@data.request_token_response.xoauth_request_auth_url %>">
-			<input value="Shopping Cart" type="submit">
-		</form>
-	</p>
+
+		<% if @data.checkout %>
+			<%= render 'checkout'%>
+			<table>
+				<tbody>
+					<tr>
+						<td>
+							<form action="./cartpostback" method="POST">
+								<input type="submit" value="Place Order" />
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		<% else %>
+		<div style="padding-bottom: 20px" >
+				<div id="checkoutButtonDiv" onClick="handleBuyWithMasterPass()">
+					<a href="#">
+						<img src="https://www.mastercard.com/mc_us/wallet/img/en/US/mcpp_wllt_btn_chk_147x034px.png" alt="Buy with MasterPass">
+					</a>
+				</div>
+				<p><a href="http://www.mastercard.com/mc_us/wallet/learnmore/en" target="_blank">Learn More</a></p>
+			
+		</div>
+		<div>
+    	<fieldset>
+    		<legend>Javascript</legend>
+<pre><code id="sampleCode">
+</code></pre>
+    		</fieldset>
+    	</div>
+		<% end %>
+             <%= masterpass_js_tags @data %>    
+        <script>
+        var showRewards = false == true;
+        $(document).ready(function(){
+            if (showRewards){
+                var sampleCodeString = 'MasterPass.client.checkout({\n\t"requestToken":<%= @data.request_token_response.oauth_token%>,\n\t"callbackUrl":<%= @data.callback_url%>,\n\t"merchantCheckoutId":<%= @data.checkout_identifier%>,\n\t"allowedCardTypes":<%= @data.accepted_cards%>,\n\t"cancelCallback":<%= @data.callback_domain%>,\n\t"suppressShippingAddressEnable":<%= @data.shipping_suppression%>,\n\t"loyaltyEnabled":<%= @data.rewards%>,\n\t"allowedLoyaltyPrograms":<%= raw @data.allowed_loyalty_programs%>,\n\t"requestBasicCheckout":<%= @data.auth_level_basic%>,\n\t"version":"v6"\n});';
+            } else {
+                var sampleCodeString = 'MasterPass.client.checkout({\n\t"requestToken":<%= @data.request_token_response.oauth_token%>,\n\t"callbackUrl":<%= @data.callback_url%>,\n\t"merchantCheckoutId":<%= @data.checkout_identifier%>,\n\t"allowedCardTypes":<%= @data.accepted_cards%>,\n\t"cancelCallback":<%= @data.callback_domain%>,\n\t"suppressShippingAddressEnable":<%= @data.shipping_suppression%>,\n\t"loyaltyEnabled":<%= @data.rewards%>,\n\t"requestBasicCheckout":<%= @data.auth_level_basic%>,\n\t"version":"v6"\n});';
+            }
+            $("#sampleCode").text(sampleCodeString);
+            
+        })
+        
+        $('#pairingCheckout').click(function(event) {
+                $("#pairingCheckoutForm").attr("action", "/pairingtoken?checkout=true");
+                $("#pairingCheckoutForm").submit();
+        });
+
+        function handleBuyWithMasterPass() {
+            if (showRewards){
+                MasterPass.client.checkout({
+                     "requestToken":"<%= @data.request_token_response.oauth_token%>",
+                     "callbackUrl":"<%=@host_name + @data.callback_url%>",
+                     "merchantCheckoutId":"<%= @data.checkout_identifier%>",
+                     "allowedCardTypes":"<%= @data.accepted_cards%>",
+                     "cancelCallback" : "<%= @data.callback_domain%>",
+                     "suppressShippingAddressEnable": "<%= @data.shipping_suppression%>",
+                     "loyaltyEnabled" : "<%= @data.rewards%>",
+                     "allowedLoyaltyPrograms":<%= raw @data.allowed_loyalty_programs%>,
+                     "requestBasicCheckout" : <%= @data.auth_level_basic%>,
+                     "version":"v6"
+                });
+            } else {
+                MasterPass.client.checkout({
+                     "requestToken":"<%= @data.request_token_response.oauth_token%>",
+                     "callbackUrl":"<%= @host_name + @data.callback_url%>",
+                     "merchantCheckoutId":"<%= @data.checkout_identifier%>",
+                     "allowedCardTypes":"<%= @data.accepted_cards%>",
+                     "cancelCallback" : "<%= @data.callback_domain%>",
+                     "suppressShippingAddressEnable": "<%= @data.shipping_suppression%>",
+                     "loyaltyEnabled" : "<%= @data.rewards%>",
+                     "requestBasicCheckout" : <%= @data.auth_level_basic%>,
+                     "version":"v6"
+                });
+            }
+        }
+        
+        
+   </script> 
 </body>
 </html>

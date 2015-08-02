@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root "test#index"
   get "oauth" => "test#oauth"
   post "shoppingcart" => "test#shopping_cart"
+  get "cartcallback" => "test#cart_callback"
+  post "cartpostback" => "test#postback"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,524 @@
+<h2>Results</h2>
+<p>Following are the results returned after retrieving Shipping
+	Address &amp; Credit Card information from the Wallet.</p>
+
+<fieldset>
+	<legend>General Information</legend>
+	<table>
+		<tbody>
+			<tr>
+				<th><label for="TransactionId"> Transaction Id:</label>
+				</th>
+				<td>
+					<%= @data.checkout.transactionId %>
+				</td>
+			</tr>
+			
+		</tbody>
+	</table>
+</fieldset>
+<% if @data.checkout.card %>
+<fieldset>
+	<legend>Card Information</legend>
+	<table>
+		<tbody>
+			<tr>
+				<th><label for="Card_CardHolderName"> Cardholder Name:</label>
+				</th>
+				<td>
+					<%= @data.checkout.card.cardHolderName %>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="Card_AccountNumber"> Account Number:</label>
+				</th>
+				<td>
+					<%= @data.checkout.card.accountNumber %>
+				</td>
+			</tr>
+			<tr>
+				<th>Billing Address:</th>
+				<td>
+					<%= @data.checkout.card.billingAddress.line1 %>
+					<br> 
+					<%= @data.checkout.card.billingAddress.line2 %>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<%= @data.checkout.card.billingAddress.city %> <%= @data.checkout.card.billingAddress.countrySubdivision %> <%= @data.checkout.card.billingAddress.postalCode %>
+					<br>
+					<%= @data.checkout.card.billingAddress.country %>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="Card_ExpiryDate"> Expiration Date:</label>
+				</th>
+				<td>
+					<% if @data.checkout.card != nil %>
+					  <%= @data.checkout.card.expiryMonth %>/<%= @data.checkout.card.expiryYear %>
+					 <% end %>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="Card_BrandId">Brand Id:</label>
+				</th>
+				<td>
+					<%= @data.checkout.card.brandId %>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="Card_BrandName">Brand Name:</label>
+				</th>
+				<td>
+					<%= @data.checkout.card.brandName %>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</fieldset>
+<% else %>
+<fieldset>
+	<legend>Card Information</legend>
+	<table>
+		<tbody>
+			<tr>
+				<th><label for="Card_CardHolderName"> Cardholder Name:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="Card_AccountNumber"> Account Number:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th>Billing Address:</th>
+				<td>
+					<br> 
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+				
+					<br>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="Card_ExpiryDate"> Expiration Date:</label>
+				</th>
+				<td>
+					
+				</td>
+			</tr>
+			<tr>
+				<th><label for="Card_BrandId">Brand Id:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="Card_BrandName">Brand Name:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</fieldset>
+<% end %>
+<% if @data.checkout.contact %>
+<fieldset>
+	<legend>Contact Information</legend>
+	<table>
+		<tbody>
+			<tr>
+				<th>Name:</th>
+				<td>
+					<%= @data.checkout.contact.firstName %> <%= @data.checkout.contact.lastName %>
+				</td>
+			</tr>
+			<tr>
+				<th>Gender:</th>
+				<td>
+					<%= @data.checkout.contact.gender %>
+				</td>
+			</tr>	
+			<tr>
+				<th>Date of Birth:</th>
+				<td>
+					<% if @data.checkout.contact.dateOfBirth != nil %>
+						<%= @data.checkout.contact.dateOfBirth.month %> / <%= @data.checkout.contact.dateOfBirth.day %> / <%= @data.checkout.contact.dateOfBirth.year %> 
+					<% end %>
+				</td>
+			</tr>
+			<tr>
+				<th>National ID:</th>
+				<td>
+					<%= @data.checkout.contact.nationalID %>
+				</td>
+			</tr>			
+			<tr>
+				<th>Country:</th>
+				<td>
+					<%= @data.checkout.contact.country %>
+				</td>
+			</tr>																									
+			<tr>
+				<th><label for="Contact_PhoneNumber"> Phone Number:</label>
+				</th>
+				<td>
+					<%= @data.checkout.contact.phoneNumber %>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="Contact_EmailAddress"> Email Address:</label>
+				</th>
+				<td>
+					<%= @data.checkout.contact.emailAddress %>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</fieldset>
+<% else %>
+<fieldset>
+	<legend>Contact Information</legend>
+	<table>
+		<tbody>
+			<tr>
+				<th>Name:</th>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th>Gender:</th>
+				<td>
+				</td>
+			</tr>	
+			<tr>
+				<th>Date of Birth:</th>
+				<td>
+					
+				</td>
+			</tr>
+			<tr>
+				<th>National ID:</th>
+				<td>
+				</td>
+			</tr>			
+			<tr>
+				<th>Country:</th>
+				<td>
+				</td>
+			</tr>																									
+			<tr>
+				<th><label for="Contact_PhoneNumber"> Phone Number:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="Contact_EmailAddress"> Email Address:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</fieldset>
+<% end %>
+<% if @data.checkout.shippingAddress %>
+<fieldset>
+	<legend>Shipping Address</legend>
+	<table>
+		<tbody>
+			<tr>
+				<th><label for="ShippingAddress_RecipientName"> Recipient Name:</label>
+				</th>
+				<td>
+					<%= @data.checkout.shippingAddress.recipientName %>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="ShippingAddress_RecipientPhoneNumber"> Recipient
+						Phone Number:</label>
+				</th>
+				<td>
+					<%= @data.checkout.shippingAddress.recipientPhoneNumber %>
+				</td>
+			</tr>
+			<tr>
+				<th>Address:</th>
+				<td>
+					<%= @data.checkout.shippingAddress.line1 %>
+					<br>
+					<%= @data.checkout.shippingAddress.line2 %>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<%= @data.checkout.shippingAddress.city %> <%= @data.checkout.shippingAddress.countrySubdivision %> <%= @data.checkout.shippingAddress.postalCode %>
+					<br>
+					<%= @data.checkout.shippingAddress.country %>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</fieldset>
+<% else %>
+<fieldset>
+	<legend>Shipping Address</legend>
+	<table>
+		<tbody>
+			<tr>
+				<th><label for="ShippingAddress_RecipientName"> Recipient Name:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="ShippingAddress_RecipientPhoneNumber"> Recipient
+						Phone Number:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th>Address:</th>
+				<td>
+					<br>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+				
+					<br>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</fieldset>
+<% end %>
+<% if @data.checkout.rewardProgram %>
+<fieldset>
+	<legend>Rewards Program</legend>
+	<table>
+		<tbody>
+			<tr>
+				<th><label for="RewardProgram_RewardNumber">Reward Number:</label>
+				</th>
+				<td>
+					<%= @data.checkout.rewardProgram.rewardNumber %>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="RewardProgram_RewardsId">Rewards Id:</label>
+				</th>
+				<td>
+					<%= @data.checkout.rewardProgram.rewardId %>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="RewardProgram_RewardName">Reward Name:</label>
+				</th>
+				<td>
+					<%= @data.checkout.rewardProgram.rewardName %>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="RewardProgram_ExpiryMonth">Expiry Month:</label>
+				</th>
+				<td>
+					<%= @data.checkout.rewardProgram.expiryMonth %>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="RewardProgram_ExpiryYear">Expiry Year:</label>
+				</th>
+				<td>
+					<%= @data.checkout.rewardProgram.expiryYear %>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</fieldset>
+<% else %>
+<fieldset>
+	<legend>Rewards Program</legend>
+	<table>
+		<tbody>
+			<tr>
+				<th><label for="RewardProgram_RewardNumber">Reward Number:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="RewardProgram_RewardsId">Rewards Id:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="RewardProgram_RewardName">Reward Name:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="RewardProgram_ExpiryMonth">Expiry Month:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="RewardProgram_ExpiryYear">Expiry Year:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</fieldset>
+<% end %>
+<% if @data.checkout.authenticationOptions %>
+<fieldset>
+	<legend>Advanced Authentication (3DS)</legend>
+	<table>
+		<tbody>
+			<tr>
+				<th><label for="AuthenticateMethod">Authenticate Method:</label>
+				</th>
+				<td>
+					<%= @data.checkout.authenticationOptions.authenticateMethod %>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="CardEnrollmentMethod">Card Enrollment Method:</label>
+				</th>
+				<td>
+					<%= @data.checkout.authenticationOptions.cardEnrollmentMethod %>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="CAvv">CAvv:</label>
+				</th>
+				<td>
+					<%= @data.checkout.authenticationOptions.cAvv %>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="eciFlag">EciFlag:</label>
+				</th>
+				<td>
+					<%= @data.checkout.authenticationOptions.eciFlag %>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="MasterCardAssignedID">Master Card Assigned Id</label>
+				</th>
+				<td>
+					<%= @data.checkout.authenticationOptions.masterCardAssignedID %>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="paResStatus">PaResStatus:</label>
+				</th>
+				<td>
+					<%= @data.checkout.authenticationOptions.paResStatus %>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="SCEnrollmentStatus">SCEnrollmentStatus:</label>
+				</th>
+				<td>
+					<%= @data.checkout.authenticationOptions.sCEnrollmentStatus %>	
+				</td>
+			</tr>
+			<tr>
+				<th><label for="signatureVerification">SignatureVerification:</label>
+				</th>
+				<td>
+					<%= @data.checkout.authenticationOptions.signatureVerification %>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="xid">Xid:</label>
+				</th>
+				<td>
+					<%= @data.checkout.authenticationOptions.xid %>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</fieldset>
+<% else %>
+<fieldset>
+	<legend>Advanced Authentication (3DS)</legend>
+	<table>
+		<tbody>
+			<tr>
+				<th><label for="AuthenticateMethod">Authenticate Method:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="CardEnrollmentMethod">Card Enrollment Method:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="CAvv">CAvv:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="eciFlag">EciFlag:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="MasterCardAssignedID">Master Card Assigned Id</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="paResStatus">PaResStatus:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="SCEnrollmentStatus">SCEnrollmentStatus:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="signatureVerification">SignatureVerification:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="xid">Xid:</label>
+				</th>
+				<td>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</fieldset>
+<% end %>
